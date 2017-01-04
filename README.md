@@ -1,10 +1,12 @@
-# avatarUpload
-移动端头像上传控件
-![image](https://github.com/yeahisme/avatarUpload/screenshot.png)
+# avatarUpload (移动端头像上传控件)
+ 
+![移动端头像上传控件截图](https://github.com/yeahisme/avatarUpload/blob/master/screenshot.png)
 
-# 兼容性
-支持URL.createObjectURL都兼容  
+devDependencies:{"jquery3.1.1-min","hammer.min"}
 
+hammer主要用于图片的移动和缩放
+# 使用方法
+```JavaScript
 //配置信息
 var options = {
 	containerId: "#pictureUpload",
@@ -24,7 +26,9 @@ var options = {
   //图片质量0-1	
   imgQuality:1
 }
+```
 
+```JavaScript
 //获取操作对象
 var txUpload = avatarUpload(options);
 //文件 onchange事件
@@ -46,3 +50,30 @@ $("#submit").click(function(){
 $("#createLocalImg").click(function(){
 	txUpload.createLocalImg("localImg","canvasWrap","localImg");
 });
+```
+
+```JavaScript
+//定义上传的函数
+function sendFile(fileblob) {
+	console.log(fileblob)
+	var url = "/";
+	var xhr = new XMLHttpRequest();
+	var fd = new FormData();
+
+	fd.append("file", fileblob,"avatar.jpg");
+
+	xhr.open("POST", url, true);
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState == 4 && xhr.status == 200) {
+			var data = JSON.parse(xhr.responseText)
+			if(data.success){
+				console.log("成功");
+			}
+		}
+	};
+	xhr.send(fd);
+}
+		
+```
+# 兼容性
+支持URL.createObjectURL都兼容  
