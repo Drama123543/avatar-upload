@@ -49,14 +49,14 @@ $("#createLocalImg").click(function(){
 	txUpload.createLocalImg("localImg","canvasWrap","localImg");
 });
 
-//定义发送二进制的函数
+//定义上传的函数
 function sendFile(fileblob) {
 	console.log(fileblob)
 	var url = "/";
 	var xhr = new XMLHttpRequest();
 	var fd = new FormData();
 
-	fd.append("file", fileblob,"123.jpg");
+	fd.append("file", fileblob,"avatar.jpg");
 
 	xhr.open("POST", url, true);
 	xhr.onreadystatechange = function() {
@@ -67,7 +67,6 @@ function sendFile(fileblob) {
 			}
 		}
 	};
-	// Initiate a multipart/form-data upload
 	xhr.send(fd);
 }
 		
