@@ -26,7 +26,9 @@ var options = {
   //图片质量0-1	
   imgQuality:1
 }
+```
 
+```JavaScript
 //获取操作对象
 var txUpload = avatarUpload(options);
 //文件 onchange事件
@@ -48,7 +50,9 @@ $("#submit").click(function(){
 $("#createLocalImg").click(function(){
 	txUpload.createLocalImg("localImg","canvasWrap","localImg");
 });
+```
 
+```JavaScript
 //定义上传的函数
 function sendFile(fileblob) {
 	console.log(fileblob)
