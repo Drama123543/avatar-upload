@@ -92,7 +92,10 @@ var avatarUpload = function(options) {
             }
 
         };
-
+        //释放上个图片的资源
+        if(imgObjectURL){
+            window.URL.revokeObjectURL(imgObjectURL);
+        }
         //生成图片的URL
         imgObjectURL = window.URL.createObjectURL(file);
 
