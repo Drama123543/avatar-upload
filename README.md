@@ -1,6 +1,7 @@
 # avatarUpload
-移动端头像上传控件
-![image](https://github.com/yeahisme/avatarUpload/blob/master/screenshot.png)
+移动端头像上传控件  
+
+![移动端头像上传控件截图](https://github.com/yeahisme/avatarUpload/blob/master/screenshot.png)
 
 # 兼容性
 支持URL.createObjectURL都兼容  
