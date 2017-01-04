@@ -3,6 +3,7 @@
 ![移动端头像上传控件截图](https://github.com/yeahisme/avatarUpload/blob/master/screenshot.png)
 
 devDependencies:{"jquery3.1.1-min","hammer.min"}
+
 hammer主要用于图片的移动和缩放
 # 使用方法
 ```JavaScript
