@@ -1,10 +1,10 @@
 # avatarUpload
 移动端头像上传控件
-![image](https://github.com/yeahisme/avatarUpload/screenshot.png)
+![image](https://github.com/yeahisme/avatarUpload/blob/master/screenshot.png)
 
 # 兼容性
 支持URL.createObjectURL都兼容  
-
+```JavaScript
 //配置信息
 var options = {
 	containerId: "#pictureUpload",
@@ -46,3 +46,4 @@ $("#submit").click(function(){
 $("#createLocalImg").click(function(){
 	txUpload.createLocalImg("localImg","canvasWrap","localImg");
 });
+```
