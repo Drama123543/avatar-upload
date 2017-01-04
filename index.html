@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/default.css">
+</head>
+<body>
+	<div id="conWrap">
+	    <!--拖动选择层-->
+	    <div id="pictureUpload">
+	        <div id="pictureUpload-bg"></div>
+	        <div id="pictureUpload-mask"></div>
+	    </div>
+	    
+	    <!--操作按钮-->
+	    <div id="button">
+	        <div id="select" class="active">选择</div>
+	        <div id="preview">预览</div>
+	        <div id="submit">上传</div>
+	        <div id="createLocalImg">生成</div>
+	    </div>
+	    
+	    <!--文件域-->
+	    <input type="file" id="fileElem" multiple accept="image/*" style="display:none">
+
+	    <!-- 操作提示 -->
+	    <div id="pictureUpload-help">
+	        <p>提示:</p>
+	        <p>单指拖动</p>
+	        <p>双指缩放</p>
+	    </div>
+
+	    <!--用于生成和预览-->
+	    <div id="canvasWrap">
+	    	<canvas id="canvas"></canvas>
+	    </div>
+    </div>
+
+<script src="js/jquery3.1.1-min.js"></script>
+<script src="js/hammer.min.js"></script>
+<script src="src/avatarUpload.js"></script>
+<script type="text/javascript">
+
+	$(function(){
+
+		//定义发送二进制的函数
+		function sendFile(fileblob) {
+			console.log(fileblob)
+			var url = "/";
+			var xhr = new XMLHttpRequest();
+			var fd = new FormData();
+
+			fd.append("file", fileblob,"123.jpg");
+
+			xhr.open("POST", url, true);
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					var data = JSON.parse(xhr.responseText)
+					if(data.success){
+						console.log("成功");
+					}
+				}
+			};
+			// Initiate a multipart/form-data upload
+			xhr.send(fd);
+		}
+
+		var options = {
+			containerId: "#pictureUpload",
+			uploadBgId: "#pictureUpload-bg",
+			fileId: "#fileElem",
+			canvasId: "#canvas",
+			container: {
+				width: $("#pictureUpload").width(),
+				height: $("#pictureUpload").height()
+			},
+			clip:{
+				width: $("#pictureUpload-mask").width(),
+				height: $("#pictureUpload-mask").height()
+			},
+			imgQuality:1
+		}
+
+
+
+		var txUpload = avatarUpload(options);
+		$("#select").click(txUpload.selectImg)
+		$("#preview").click(txUpload.createImg)
+		$("#submit").click(function(){
+			txUpload.submit(sendFile);
+		})
+		$("#createLocalImg").click(function(){
+			txUpload.createLocalImg("localImg","canvasWrap","localImg");
+		});
+		//文件 onchange事件
+    	$("#fileElem").on("change",  function(){
+    		txUpload.handleFiles(function(){
+    			$("#preview, #submit, #createLocalImg").addClass('active');
+    		})
+    	});
+		
+
+	})
+
+</script>
+</body>
+</html>
