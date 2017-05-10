@@ -77,3 +77,5 @@ function sendFile(fileblob) {
 ```
 # 兼容性
 支持URL.createObjectURL都兼容  
+
+##### 张东华 1210126126@qq.com
