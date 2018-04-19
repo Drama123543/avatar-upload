@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>avatar-upload</title>
+  <link rel="stylesheet" href="css/default.css">
+</head>
+<body>
+  <div class="header">
+    <a class="repository" href="https://github.com/ishanyang/avatar-upload">github</a>
+    <span id="js-submit" class="submit">使用</span>
+    <span id="js-select" class="select">选择</span>
+  </div>
+
+  <div id="js-pictureUpload" class="pictureUpload">
+    <img class="help-place" src="images/help-place.png"/>
+    <div id="js-pictureUpload-bg" class="pictureUpload-bg"></div>
+    <div id="js-pictureUpload-mask" class="pictureUpload-mask"></div>
+  </div>
+
+  <!-- 操作提示 -->
+  <div class="tip">
+    <p>提示: 单指拖动 双指缩放</p>
+  </div>
+
+  <!--文件域-->
+  <input type="file" id="js-fileElem" multiple accept="image/*" style="display:none">
+  <!--用于生成和预览-->
+  <canvas id="js-canvas" class="canvas"></canvas>
+
+<script src="js/jquery3.1.1-min.js"></script>
+<script src="js/hammer.min.js"></script>
+<script src="../dist/avatar-upload.js"></script>
+<script type="text/javascript">
+
+  $(function(){
+    var avatarUpload = require("avatar-upload");
+
+    //定义发送二进制的函数
+    function sendFile(base64Url) {
+      // ajax上传base64
+      alert("ajax上传base64")
+
+      /*java https://www.cnblogs.com/mr-wuxiansheng/p/6931034.html*/
+
+      /* node.js
+      app.post('/upload', function(req, res){
+          //接收前台POST过来的base64
+          var imgData = req.body.imgData;
+          //过滤data:URL
+          var base64Data = imgData.replace(/^data:image\/\w+;base64,/, "");
+          var dataBuffer = new Buffer(base64Data, 'base64');
+          fs.writeFile("image.png", dataBuffer, function(err) {
+              if(err){
+                res.send(err);
+              }else{
+                res.send("保存成功！");
+              }
+          });
+      });
+       */
+    }
+
+    var $container = $("#js-pictureUpload");
+    var $mask = $("#js-pictureUpload-mask");
+    var $fileElem = $("#js-fileElem");
+    var $submit = $("#js-submit");
+    var $select = $("#js-select");
+    var options = {
+      containerId: "#js-pictureUpload",
+      uploadBgId: "#js-pictureUpload-bg",
+      fileId: "#js-fileElem",
+      canvasId: "#js-canvas",
+      container: {
+        width: $container.width(),
+        height: $container.height()
+      },
+      clip:{
+        width: $mask.width(),
+        height: $mask.height()
+      },
+      imgQuality:1
+    }
+
+    var txUpload = avatarUpload($,Hammer,options);
+    $select.click(txUpload.selectImg)
+    $submit.click(function(){
+      txUpload.submit(sendFile);
+    })
+    
+    //文件 onchange事件
+    $fileElem.on("change", function(){
+      txUpload.handleFiles(function(){
+        $submit.addClass('active');
+      })
+    });
+    
+
+  })
+
+</script>
+</body>
+</html>

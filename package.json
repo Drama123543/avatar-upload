@@ -1,0 +1,27 @@
+{
+  "name": "avatar-upload",
+  "version": "2.0.0",
+  "description": "Address book alphabet touch index",
+  "main": "./src/avatarUpload.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify -r ./src/avatarUpload.js:avatar-upload > ./dist/avatar-upload.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ishanyang/avatarUpload.git"
+  },
+  "keywords": [
+    "avatar",
+    "upload"
+  ],
+  "author": "ishanyang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ishanyang/avatarUpload/issues"
+  },
+  "homepage": "https://github.com/ishanyang/avatarUpload#readme",
+  "devDependencies": {
+    "browserify": "^16.2.0"
+  }
+}
