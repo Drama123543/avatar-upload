@@ -1,5 +1,5 @@
 # avatarUpload (移动端头像上传控件)
-[![示例](https://raw.githubusercontent.com/ishanyang/i-touch-bar/master/demo/screenshot.png)](https://ishanyang.github.io/avatar-upload/demo/index.html)
+[![示例](https://raw.githubusercontent.com/ishanyang/avatar-upload/master/demo/screenshot.png)](https://ishanyang.github.io/avatar-upload/demo/index.html)
 
 devDependencies:{"jquery","hammer"}
 
